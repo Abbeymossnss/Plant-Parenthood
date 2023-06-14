@@ -18,9 +18,9 @@ export const ApplicationViews = () => {
             </>
           }
         >
-          <Route path="plants" element={<PlantList />} />
         </Route>
-        <Route path="plants" element={<NewPlantForm />} />
+          <Route path="plants" element={<PlantList />} />
+        <Route path="plants/create" element={<NewPlantForm />} />
       
   
       </Routes>
