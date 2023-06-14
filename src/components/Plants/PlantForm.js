@@ -12,8 +12,8 @@ export const NewPlantForm = () => {
         "name": "",
         "sunlightTypeId": 0,
         "maintenanceTypeId": 0,
-        "notes":""
-})
+        "notes": ""
+    })
 
 
 
@@ -28,88 +28,106 @@ export const NewPlantForm = () => {
         fetch(`http://localhost:8088/sunlightTypes`)
             .then(response => response.json())
             .then((sunlightTypes) => {
-               changeNewSunlightArrayState(sunlightTypes)
+                changeNewSunlightArrayState(sunlightTypes)
             })
     },
 
         [])
 
-    
-        /*
-            TODO: Use the useNavigation() hook so you can redirect
-            the user to the ticket list
-        */
 
-        // const localPlantUser = localStorage.getItem("plant_user")
-        // const PlantUserObject = JSON.parse(localPlantUser)
+    /*
+        TODO: Use the useNavigation() hook so you can redirect
+        the user to the ticket list
+    */
 
-    
-            // TODO: Create the object to be saved to the API
+    // const localPlantUser = localStorage.getItem("plant_user")
+    // const PlantUserObject = JSON.parse(localPlantUser)
 
 
-            // TODO: Perform the fetch() to POST the object to the API
-        
+    // TODO: Create the object to be saved to the API
 
-        return (
-            <>
-                <h1> Create a  new product</h1>
 
-                <form>
+    // TODO: Perform the fetch() to POST the object to the API
 
-                    <input value={plant.name}
-                        type="text" 
-                        placeholder="Name new plant..." 
-                        onChange={
-                            (evt) => {
-                                const copyPlant={...plant}
-                                copyPlant.name = evt.target.value
-                                updatePlant(copyPlant)
-                            }
+
+    return (
+        <>
+            <h1> Create a  new product</h1>
+
+            <form>
+<fieldset>
+                <input value={plant.name}
+                    type="text"
+                    placeholder="Name new plant..."
+                    onChange={
+                        (evt) => {
+                            const copyPlant = { ...plant }
+                            copyPlant.name = evt.target.value
+                            updatePlant(copyPlant)
                         }
-                        />
+                    }
+                />
+                </fieldset>
+                <fieldset>    
 
-
-                    {/* <input value={plant.image}
+                {/* <input value={plant.image}
                         onChange={(evt) => changePlantImage(evt.target.value)}
                         type="text" placeholder="paste img url here.." /> */}
 
-                    <input value={plant.notes}
-                        type="text"
-                         placeholder="Type Plant Details here..."
-                        onChange={
-                            (evt) => { 
-                                const copyPlant={...plant}
-                                copyPlant.notes = evt.target.value
-                                updatePlant(copyPlant)
-                            }
+                <input value={plant.notes}
+                    type="text"
+                    placeholder="Type Plant Details here..."
+                    onChange={
+                        (evt) => {
+                            const copyPlant = { ...plant }
+                            copyPlant.notes = evt.target.value
+                            updatePlant(copyPlant)
                         }
-                               
-                         />
+                    }
+
+                />
+                </fieldset>
+                {/* <fieldset>    
 
 
-                    <select value={plant.sunlightTypeId}
-                        onChange={(evt) => changeChosenSunlightType(evt.target.value)}>
-                        <option value="0">Pick a sunlight type...</option>
-                        {newSunlightArray.map((sunlightType) => (
-                            <option key={sunlightType.id} value={sunlightType.id}>{sunlightType.sunlightType}</option>
-                        ))}
-                    </select>
+                <div value="0"> Pick a sunlight type...</div>
 
-                    <button>Save Plant</button>
-                </form>
 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            </>
-           
-        
-        ) 
+                <select value={plant.sunlightTypeId}>
+                    {/* // onChange={(evt) => changeChosenSunlightType(evt.target.value)}  */}
+                    {/* {newSunlightArray.map((sunlightType) => (
+                        <option 
+                            placeholder="Type Plant Details here..."
+                        value={sunlightType.id}>
+                            {sunlightType.sunlightType}
+                        </option>
+                    ))} */}
+<div className="form-group">
+<label htmlFor= "name"></label>
+
+
+
+</div>
+
+
+                </select>
+                </fieldset> */}
+
+                <button>Save Plant</button>
+            </form>
+
+
+
+
+
+
+
+
+
+
+
+        </>
+
+
+    )
 }
