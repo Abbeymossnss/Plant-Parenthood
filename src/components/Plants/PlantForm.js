@@ -8,6 +8,7 @@ export const NewPlantForm = () => {
            initial state object
        */
     const [newSunlightArray, changeNewSunlightArrayState] = useState([])
+    const [newMaintenanceArray, changeNewMaintenanceArrayState] = useState([])
     const [plant, updatePlant] = useState({
         "name": "",
         "sunlightTypeId": 0,
@@ -19,6 +20,7 @@ export const NewPlantForm = () => {
     // const [plantNotes, changePlantNotes] = useState("")
     // const [chosenSunlightType, changeChosenSunlightType] = useState(0)
 
+
     useEffect(() => {
         fetch(`http://localhost:8088/sunlightTypes`)
             .then(response => response.json())
@@ -28,24 +30,64 @@ export const NewPlantForm = () => {
     },
 
         [])
+
+    useEffect(() => {
+        fetch(`http://localhost:8088/maintenanceTypes`)
+            .then(response => response.json())
+            .then((maintenanceTypes) => {
+                changeNewMaintenanceArrayState(maintenanceTypes)
+            })
+    },
+
+        [])
     /*
         TODO: Use the useNavigation() hook so you can redirect
         the user to the ticket list
     */
-
     // const localPlantUser = localStorage.getItem("plant_user")
     // const PlantUserObject = JSON.parse(localPlantUser)
 
-
     // TODO: Create the object to be saved to the API
-
-
+    const navigate = useNavigate()
     // TODO: Perform the fetch() to POST the object to the API
+    const savePlant = (evt) => {
+        evt.preventDefault();
+
+
+        const newPlantObjectToStringify = {
+            "name": plant.name,
+            "notes": plant.notes,
+            "sunlightTypeId": plant.sunlightTypeId,
+            "maintenanceTypeId": plant.maintenanceTypeId
+
+        }
+
+        return fetch(`http://localhost:8088/plants`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newPlantObjectToStringify)
+        })
+            .then(response => response.json())
+            .then(() => {
+                navigate("/plants")
+            })
+    }
+
+
+
+
+
+
+
+
     return (
         <>
-            <h1> Create a  new product</h1>
+            <h1> Create New Plant!</h1>
             <form>
                 <fieldset>
+                    <h2>Name Your Plant:</h2>
                     <input value={plant.name}
                         type="text"
                         placeholder="Name new plant..."
@@ -59,6 +101,7 @@ export const NewPlantForm = () => {
                     />
                 </fieldset>
                 <fieldset>
+                    <h2>Tell us about your Plant:</h2>
                     {/* <input value={plant.image}
                         onChange={(evt) => changePlantImage(evt.target.value)}
                         type="text" placeholder="paste img url here.." /> */}
@@ -76,6 +119,7 @@ export const NewPlantForm = () => {
                     />
                 </fieldset>
                 <fieldset>
+                    <h2> Sunlight Type Received:</h2>
                     <select
                         value={plant.sunlightTypeId}
                         onChange={
@@ -91,11 +135,36 @@ export const NewPlantForm = () => {
                                 {sunlightType.sunlightType}
 
                             </option>
+
                         ))}
                     </select>
                 </fieldset>
+                <fieldset>
+                    <h2>Maintenance Type Required:</h2>
+                    <select
+                        value={plant.maintenanceTypeId}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...plant }
+                                copy.maintenanceTypeId = evt.target.value
+                                updatePlant(copy)
+                            }
+                        }>
+                        <option value="" defaultValue>Select Maintenance Type</option>
+                        {newMaintenanceArray.map(maintenanceType => (
+                            <option key={maintenanceType.id} value={maintenanceType.id}>
+                                {maintenanceType.maintenanceType}
 
-                <button>Save Plant</button>
+                            </option>
+
+                        ))}
+                    </select>
+
+
+
+                </fieldset>
+                <button onClick={(save) => savePlant(save)}>Submit Plant</button>
+
             </form>
 
 
@@ -112,4 +181,5 @@ export const NewPlantForm = () => {
 
 
     )
+
 }
