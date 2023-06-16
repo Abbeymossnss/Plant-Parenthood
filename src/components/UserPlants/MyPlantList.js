@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 
 export const MyPlantList = () => {
   const [plants, setPlants] = useState([]);
@@ -73,36 +75,32 @@ export const MyPlantList = () => {
 }
 */
 
-    return (
+      return (
+  <>
+ 
+
+    <button>Edit My Plant</button>
+    <button>Delete My Plant</button>
+
+    <h2>My Plant Babies</h2>
+    <article className="Plants">
+      {filteredMyPlants.map((plant) => {
+        return (  
         <>
-            <button>Edit My Plant</button>
-            <button>Delete My Plant</button>
-
-            <h2>My Plant Babies</h2>
-            <article className="Plants">
-                {filteredMyPlants.map((plant) => {
-                    return (
-                        <section className="plant">
-                            <h2>{plant.name}</h2>
-                            <header>{plant.notes}</header>
-                        </section>
-                    );
-                })}
-            </article>
-        </>
-    );
-
-            }
+          <section className="plant">
+            <Link to={`/MyPlants/${plant.id}/edit`}>{plant.name}</Link>
+            <header>{plant.notes}</header>
+          </section>
+           </>
+        );
+      })}
+    </article>
+  </>
+);
 
 
 
-
-
-
-
-
-
-
+    }
 
 
 
