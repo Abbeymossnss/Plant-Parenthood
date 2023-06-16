@@ -12,6 +12,10 @@ export const NavBar = () => {
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/plants/create">Create Plant</Link>
             </li>
+            <li className="navbar__item active">
+                <Link className="navbar__link" to="/UserPlants">My Plant List</Link>
+            </li>
+       
             {
                 localStorage.getItem("plant_user")
                     ? <li className="navbar__item navbar__logout">

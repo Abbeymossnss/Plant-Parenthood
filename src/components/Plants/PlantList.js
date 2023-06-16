@@ -6,9 +6,6 @@ export const PlantList = () => {
   const [plants, setPlants] = useState([]);
  
 
-  
- 
-
   useEffect(() => {
     fetch(`  http://localhost:8088/plants`)
       .then((response) => response.json())
@@ -16,10 +13,6 @@ export const PlantList = () => {
         setPlants(plantArray);
       });
   }, []);
-
-
-
-
 
   return (
     <>

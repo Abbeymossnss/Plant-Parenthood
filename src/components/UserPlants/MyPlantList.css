@@ -1,0 +1,12 @@
+.plants {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.plant {
+    background-color: rgb(138, 222, 126);
+    border: 3px solid rgb(78, 142, 78);
+    padding: 6rem;
+    margin: 0.5rem;
+}

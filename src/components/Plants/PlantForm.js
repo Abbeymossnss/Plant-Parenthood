@@ -7,14 +7,20 @@ export const NewPlantForm = () => {
            TODO: Add the correct default properties to the
            initial state object
        */
+ const localPlantUser = localStorage.getItem("plant_user")
+    const plantUserObject = JSON.parse(localPlantUser)
+
     const [newSunlightArray, changeNewSunlightArrayState] = useState([])
     const [newMaintenanceArray, changeNewMaintenanceArrayState] = useState([])
     const [plant, updatePlant] = useState({
         "name": "",
         "sunlightTypeId": 0,
         "maintenanceTypeId": 0,
-        "notes": ""
+        "notes": "",
+        "userId": 0
     })
+
+
     // const [plantName, changePlantName] = useState("")
     // const [plantImage, changePlantImage] = useState("")
     // const [plantNotes, changePlantNotes] = useState("")
@@ -44,8 +50,8 @@ export const NewPlantForm = () => {
         TODO: Use the useNavigation() hook so you can redirect
         the user to the ticket list
     */
-    // const localPlantUser = localStorage.getItem("plant_user")
-    // const PlantUserObject = JSON.parse(localPlantUser)
+  
+
 
     // TODO: Create the object to be saved to the API
     const navigate = useNavigate()
@@ -58,7 +64,8 @@ export const NewPlantForm = () => {
             "name": plant.name,
             "notes": plant.notes,
             "sunlightTypeId": plant.sunlightTypeId,
-            "maintenanceTypeId": plant.maintenanceTypeId
+            "maintenanceTypeId": plant.maintenanceTypeId,
+            "userId": plantUserObject.id
 
         }
 
