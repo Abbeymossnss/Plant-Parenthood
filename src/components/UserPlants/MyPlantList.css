@@ -10,3 +10,8 @@
     padding: 6rem;
     margin: 0.5rem;
 }
+
+.plant_delete {
+    margin-left: auto;
+    background-color: coral;
+}
